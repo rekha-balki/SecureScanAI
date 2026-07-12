@@ -12,11 +12,9 @@ app = FastAPI(
     version=settings.app_version,
 )
 
-
 @app.on_event("startup")
 async def startup():
     logger.info("SecureScan AI started")
-
 
 @app.on_event("shutdown")
 async def shutdown():
@@ -32,7 +30,6 @@ async def root():
         "version": settings.app_version,
     }
 
-
 @app.get("/health")
 async def health():
     logger.info("Health endpoint called")
@@ -42,3 +39,14 @@ async def health():
         "environment": settings.environment,
         "version": settings.app_version,
     }
+    
+from app.platform.errors import register_exception_handlers
+
+register_exception_handlers(app)
+
+from app.platform.errors.exceptions import ResourceNotFoundException
+
+
+@app.get("/test-error")
+async def test_error():
+    raise ResourceNotFoundException("Scan not found")
