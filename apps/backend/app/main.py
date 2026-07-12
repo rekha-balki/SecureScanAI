@@ -2,6 +2,9 @@ from fastapi import FastAPI
 
 from app.config.settings import get_settings
 from app.platform.log import get_logger
+from app.platform.errors import register_exception_handlers
+from app.platform.errors.exceptions import ResourceNotFoundException
+from app.shared.kernel.responses import ResponseBuilder
 
 settings = get_settings()
 
@@ -23,28 +26,30 @@ async def shutdown():
 
 @app.get("/")
 async def root():
+
     logger.info("Root endpoint called")
 
-    return {
-        "application": settings.app_name,
-        "version": settings.app_version,
-    }
-
+    return ResponseBuilder.success(
+        "SecureScan AI is running.",
+        {
+            "application": settings.app_name,
+            "version": settings.app_version,
+        },
+    )
+    
 @app.get("/health")
 async def health():
-    logger.info("Health endpoint called")
 
-    return {
-        "status": "UP",
-        "environment": settings.environment,
-        "version": settings.app_version,
-    }
-    
-from app.platform.errors import register_exception_handlers
+    return ResponseBuilder.success(
+        "Health check completed successfully.",
+        {
+            "status": "UP",
+            "environment": settings.environment,
+            "version": settings.app_version,
+        },
+    )
 
 register_exception_handlers(app)
-
-from app.platform.errors.exceptions import ResourceNotFoundException
 
 
 @app.get("/test-error")
