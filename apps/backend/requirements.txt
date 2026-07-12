@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+motor
+pymongo
+redis
+aiokafka
+structlog
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+reportlab
+httpx
+email-validator
+python-dotenv
