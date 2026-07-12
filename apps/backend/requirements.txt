@@ -1,0 +1,43 @@
+# ==========================================
+# SecureScan AI
+# Backend Dependencies
+# Version: v0.1.0-alpha
+# ==========================================
+
+# FastAPI
+fastapi>=0.116.0
+uvicorn[standard]>=0.35.0
+
+# Configuration
+pydantic>=2.11.0
+pydantic-settings>=2.10.0
+
+# Database
+motor>=3.7.0
+pymongo>=4.13.0
+
+# Kafka
+aiokafka>=0.12.0
+
+# Redis
+redis>=6.2.0
+
+# Authentication
+python-jose[cryptography]>=3.5.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.20
+
+# Logging
+structlog>=25.4.0
+
+# HTTP Client
+httpx>=0.28.0
+
+# PDF Generation
+reportlab>=4.4.0
+
+# Validation
+email-validator>=2.2.0
+
+# Environment
+python-dotenv>=1.1.0
