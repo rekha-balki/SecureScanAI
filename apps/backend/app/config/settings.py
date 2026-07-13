@@ -30,6 +30,16 @@ class Settings(BaseSettings):
     jwt_secret: str
 
     jwt_expiry_minutes: int = 60
+    
+    allowed_origins: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ]
+
+    trusted_hosts: list[str] = [
+        "localhost",
+        "127.0.0.1",
+    ]
 
     class Config:
         env_file = ".env"
