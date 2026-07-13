@@ -5,7 +5,9 @@ Responsible for generating and validating correlation IDs
 for distributed request tracing.
 """
 
-from uuid import uuid4
+from app.platform.observability.identifiers import (
+    generate_correlation_id as generate_identifier,
+)
 
 from app.platform.observability.context import (
     get_correlation_id,
@@ -16,7 +18,7 @@ from app.platform.observability.context import (
 def generate_correlation_id() -> str:
     """Generate a new correlation ID."""
 
-    return str(uuid4())
+    return generate_identifier()
 
 
 def ensure_correlation_id(existing: str | None = None) -> str:

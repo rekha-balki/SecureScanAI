@@ -5,12 +5,8 @@ Provides request context, correlation IDs,
 distributed tracing and metrics support.
 """
 
-from .constants import (
-    HEADER_REQUEST_ID,
-    HEADER_CORRELATION_ID,
-)
+from .registry import register_observability
 
 __all__ = [
-    "HEADER_REQUEST_ID",
-    "HEADER_CORRELATION_ID",
+    "register_observability",
 ]

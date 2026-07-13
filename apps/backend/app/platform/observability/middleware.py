@@ -4,7 +4,9 @@ Observability middleware.
 Creates request-scoped observability context.
 """
 
-from uuid import uuid4
+from app.platform.observability.identifiers import (
+    generate_request_id,
+)
 
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -29,7 +31,7 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request, call_next):
 
-        request_id = str(uuid4())
+        request_id = generate_request_id()
 
         set_request_id(request_id)
 
