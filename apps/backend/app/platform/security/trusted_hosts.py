@@ -11,5 +11,10 @@ def register_trusted_hosts(app: FastAPI) -> None:
 
     app.add_middleware(
         TrustedHostMiddleware,
-        allowed_hosts=settings.trusted_hosts,
+        #allowed_hosts=settings.trusted_hosts,
+        allowed_hosts=[
+            "localhost",
+            "127.0.0.1",
+            "testserver",
+        ]
     )
