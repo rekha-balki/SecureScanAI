@@ -14,3 +14,4 @@ reportlab
 httpx
 email-validator
 python-dotenv
+motor>=3.7.1
