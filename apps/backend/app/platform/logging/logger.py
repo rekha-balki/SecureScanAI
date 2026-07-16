@@ -1,6 +1,6 @@
 import logging
 
-from app.platform.log.logging_config import configure_logging
+from app.platform.logging.logging_config import configure_logging
 
 # Configure logging once during import
 configure_logging()
