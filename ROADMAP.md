@@ -22,28 +22,28 @@
 ## Version 0.2.0-alpha
 
 ### SCAN-2.2.2
-- [ ] Logging Framework
+- [x] Logging Framework
 
 ### SCAN-2.2.3
-- [ ] Global Exception Handling
+- [x] Global Exception Handling
 
 ### SCAN-2.2.4
-- [ ] Standard API Response Model
+- [x] Standard API Response Model
 
 ### SCAN-2.2.5
-- [ ] Middleware
+- [x] Middleware
 
 ### SCAN-2.3
-- [ ] Shared Kernel
+- [x] Shared Kernel
 
 ### SCAN-2.4
-- [ ] MongoDB Infrastructure
+- [x] MongoDB Infrastructure
 
 ### SCAN-2.5
-- [ ] Kafka Infrastructure
+- [ ] Kafka Infrastructure (client wired, not yet used by orchestration)
 
 ### SCAN-2.6
-- [ ] Redis Infrastructure
+- [ ] Redis Infrastructure (client wired, not yet used)
 
 ---
 
@@ -51,11 +51,11 @@
 
 ### Identity Domain
 
-- [ ] User
-- [ ] Company
-- [ ] Roles
-- [ ] Permissions
-- [ ] JWT Authentication
+- [x] User
+- [x] Company
+- [x] Roles
+- [ ] Permissions (role check only; no granular permission model yet)
+- [x] JWT Authentication
 
 ---
 
@@ -63,9 +63,9 @@
 
 ### Scan Management
 
-- [ ] Scan CRUD
-- [ ] Scheduling
-- [ ] Status Tracking
+- [x] Scan CRUD (create, list, get, cancel)
+- [ ] Scheduling (run immediately only; no future/recurring schedule)
+- [x] Status Tracking
 
 ---
 
@@ -73,9 +73,9 @@
 
 ### Web Scanner
 
-- [ ] Crawler
-- [ ] Plugin Engine
-- [ ] Vulnerability Detection
+- [x] Crawler (bounded, same-host, breadth-first)
+- [x] Plugin Engine (isolated execution, fingerprint dedupe)
+- [x] Vulnerability Detection (9 built-in plugins + 4 site-level checks)
 
 ---
 
@@ -83,9 +83,9 @@
 
 ### Reporting
 
-- [ ] PDF Reports
-- [ ] Executive Summary
-- [ ] CVSS Scoring
+- [x] PDF Reports
+- [x] Executive Summary
+- [ ] CVSS Scoring (severity is plugin-assigned; no numeric CVSS calc yet)
 
 ---
 
@@ -93,10 +93,28 @@
 
 ### Production MVP
 
-- [ ] Multi-tenancy
-- [ ] RBAC
-- [ ] Dashboard
-- [ ] Notifications
-- [ ] Audit Logs
+- [ ] Multi-tenancy hardening (data isolation exists via company_id; no
+      platform-admin cross-tenant console yet)
+- [x] RBAC (role-gated endpoints)
+- [x] Dashboard
+- [x] Notifications (scan started/completed/failed/cancelled, report
+      ready, finding assigned/updated)
+- [x] Audit Logs (register, login, logout, password reset, user/company
+      changes, scan submit/cancel/delete/rerun, settings changes)
+- [x] Forgot / reset password (FR-003) — dev-mode token exposure until
+      SMTP sending is wired up
+- [x] Scan delete / re-run (FR-019)
+- [x] Company settings persistence (FR Section 14) — theme, password
+      policy, session timeout, scanner defaults, report branding, SMTP
+      config fields (not yet used to actually send mail)
+- [x] Rate limiting (FR Section 15) — Redis-backed, fails open
+- [ ] Durable job queue / multi-worker orchestration (currently in-process
+      background tasks; see README "Known simplifications")
+- [ ] Pause / resume scans
+- [ ] Actually send email (password reset, notifications) via the
+      persisted SMTP settings
+- [ ] Company-configurable password policy enforced at registration
+      (currently the fixed FR-001 policy is hardcoded)
+
 - [ ] API Documentation
 - [ ] Production Deployment

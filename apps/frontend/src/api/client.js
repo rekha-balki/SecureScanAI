@@ -1,0 +1,35 @@
+import axios from "axios";
+
+const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1";
+
+export const api = axios.create({ baseURL });
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("ssai_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("ssai_token");
+      localStorage.removeItem("ssai_user");
+      if (!window.location.pathname.startsWith("/login")) {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export function extractErrorMessage(error) {
+  return (
+    error?.response?.data?.message ||
+    error?.response?.data?.detail ||
+    "Something went wrong. Please try again."
+  );
+}

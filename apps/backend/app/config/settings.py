@@ -107,6 +107,16 @@ class Settings(BaseSettings):
         "testserver",  # pytest TestClient
     ]
 
+    # ------------------------------------------------------------------
+    # Rate Limiting (FRS Section 15)
+    # ------------------------------------------------------------------
+
+    rate_limit_enabled: bool = True
+
+    rate_limit_requests_per_window: int = Field(default=120, ge=1)
+
+    rate_limit_window_seconds: int = Field(default=60, ge=1)
+
 
 @lru_cache
 def get_settings() -> Settings:

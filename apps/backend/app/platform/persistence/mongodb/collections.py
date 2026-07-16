@@ -12,6 +12,8 @@ class Collections:
 
     USERS = "users"
 
+    COMPANIES = "companies"
+
     ROLES = "roles"
 
     PERMISSIONS = "permissions"
@@ -35,6 +37,10 @@ class Collections:
     SETTINGS = "settings"
 
     NOTIFICATIONS = "notifications"
+
+    PASSWORD_RESETS = "password_resets"
+
+    ATTACK_SURFACE = "attack_surface"
     
 from motor.motor_asyncio import AsyncIOMotorCollection
 
